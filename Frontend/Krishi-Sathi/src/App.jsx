@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Chatbot from "./pages/Chatbot";
-import CropPrediction from "./pages/CropPrediction";
-import Government from "./pages/Government";
-import MarketPlace from "./pages/Marketplace";
-import PricePridiction from "./pages/PricePridiction";
+import Chatbot from "./pages/Chatbot.jsx";
+import CropPrediction from "./pages/CropPrediction.jsx";
+import Government from "./pages/Government.jsx";
+import MarketPlace from "./pages/Marketplace.jsx";
+import PricePridiction from "./pages/PricePridiction.jsx";
 import CropDisease from "./pages/CropDisease.jsx";
 import Contact from "./pages/Contact.jsx";
 import Home from "./pages/Home.jsx";
 import BuyerLogin from "./pages/BuyerLogin.jsx";
-import AccessGuard from "./components/AccessGuard";
-import NotAuthorized from "./pages/NotAuthorized";
+import AccessGuard from "./components/AccessGuard.jsx";
+import NotAuthorized from "./pages/NotAuthorized.jsx";
 import { useLocation } from "react-router-dom";
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
                 href="/"
                 className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
               >
-                <span className="fs-4">🌾 Krishi Saathi</span>
+                <span className="fs-4">🌾AgriSathi</span>
               </a>
               <hr />
 

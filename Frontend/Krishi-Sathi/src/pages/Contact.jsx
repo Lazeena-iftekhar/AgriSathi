@@ -1,41 +1,41 @@
 import React, { useState, useEffect } from "react";
 import "./contactus.css";
 
-import image1 from "../assets/krish.jpeg";
-import image2 from "../assets/devansh.jpeg";
-import image3 from "../assets/arpit_final.jpeg";
-import image4 from "../assets/prachi.jpg"
+import image1 from "../assets/Lazeena1.jpeg";
+import image2 from "../assets/KhushiGupta.jpeg";
+import image3 from "../assets/JasmineImage.jpeg";
+import image4 from "../assets/Anchal.jpeg"
 
 
 const Contact = () => {
   const teamMembers = [
     {
-      name: "Krish Batra",
-      role: "Backend Development",
-      social: {
-        linkedin: "https://www.linkedin.com/in/krish-batra-a15477313/",
-        github: "https://github.com/krishtechh",
-      },
-    },
-    {
-      name: "Devansh Pratap Singh",
-      role: "Design & Frontend Development",
-      social: {
-        linkedin: "https://www.linkedin.com/in/devansh-pratap-singh-1b0687344/",
-        github: "https://github.com/devansh069",
-      },
-    },
-    {
-      name: "Arpit Sharma",
+      name: "Lazeena Iftekhar",
       role: "AI Model Development",
       social: {
-        linkedin: "https://www.linkedin.com/in/arpit-sharma-ab5583321",
-        github: "https://github.com/Arpitsharmaaaaa",
+        linkedin: "https://www.linkedin.com/in/lazeena-iftekhar",
+        github: "https://github.com/Lazeena-iftekhar",
       },
     },
     {
-      name: "Prachi Aggarwal",
-      role: "UI UX & Frontend Development",
+      name: "Khushi Gupta",
+      role: "Backend Development ",
+      social: {
+        linkedin: "https://www.linkedin.com/in/khushi-gupta-a57b3a25a",
+        github: "https://github.com/KHU-SHIGUPTA",
+      },
+    },
+    {
+      name: "Jasmine Rai",
+      role: "UI/UX Design & Frontend Developmentt",
+      social: {
+        linkedin: "https://www.linkedin.com/in/jasmine-rai-6a422427b",
+        github: "https://github.com/Assistantjasmine282",
+      },
+    },
+    {
+      name: "Anchal Gupta",
+      role: "UI/UX & Documentation",
       social: {
         linkedin: "https://www.linkedin.com/in/prachi-aggarwal-12096a360/",
         github: "https://github.com/prachiagg06",

@@ -18,7 +18,7 @@ function Home() {
   return (
     <>
       <div className="div main_content1">
-        <h1>Welcome to Krishi Saathi</h1>
+        <h1>Welcome to AgriSathi</h1>
         {/* <div className="container-elements">
           <div className="element">
             <img src="https://cdn-icons-png.flaticon.com/128/14148/14148453.png"></img>
