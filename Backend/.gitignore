@@ -10,3 +10,5 @@ backend/dist/
 
 *.env
 tf310-env/
+venv
+venv/

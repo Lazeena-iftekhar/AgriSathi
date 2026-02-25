@@ -9,12 +9,16 @@ import tensorflow as tf
 from huggingface_hub import hf_hub_download, login
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # API Keys and Authentication
-# PLANT_ID_API_KEY = ""
+PLANT_ID_API_KEY = os.getenv("PLANT_ID_API_KEY")
 
 
 # Authenticate with Hugging Face

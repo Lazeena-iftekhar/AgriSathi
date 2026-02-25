@@ -5,6 +5,7 @@ const cors = require('cors');
 const multer = require("multer");
 const app = express();
 const bodyParser = require("body-parser")
+
 const PORT = 5000;
 
 
@@ -27,6 +28,27 @@ app.use("/api", cropRoutes);
 app.use("/api/marketplace", marketplaceRoutes);
 app.use("/api/crops", pricePredictionRoutes); 
 // app.use("/api/payment", paymentRoute)
+
+app.post("/api/chat", async (req, res) => {
+  try {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(req.body),
+      }
+    );
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Gemini Error:", error);
+    res.status(500).json({ error: "Gemini API failed" });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(` Server running on port ${PORT}`);

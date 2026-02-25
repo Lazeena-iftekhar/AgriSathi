@@ -10,8 +10,6 @@ const Chatbot = () => {
   const chatBodyRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  const API_KEY = "AIzaSyA0khAtlehzVFjUxa3KLbtobG2WngnMKqM";
-  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
   const scrollToBottom = () => {
     if (chatBodyRef.current) {
@@ -45,11 +43,13 @@ const Chatbot = () => {
     setThinking(true);
 
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: updatedHistory }),
-      });
+      const response = await fetch("http://localhost:5000/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: updatedHistory
+      }),
+    });
 
       const data = await response.json();
 
@@ -86,7 +86,7 @@ const Chatbot = () => {
     const reader = new FileReader();
     reader.onload = () => {
       const base64Data = reader.result.split(",")[1];
-      setFileData({ data: base64Data, mime_Type: file.type });
+      setFileData({ data: base64Data, mime_type: file.type });
     };
     reader.readAsDataURL(file);
   };
@@ -211,7 +211,7 @@ const Chatbot = () => {
                 {entry.parts[0].text}
                 {entry.parts[1]?.inline_data && (
                   <img
-                    src={`data:${entry.parts[1].inline_data.mime_Type};base64,${entry.parts[1].inline_data.data}`}
+                    src={`data:${entry.parts[1]?.inline_data.mime_type};base64,${entry.parts[1].inline_data.data}`}
                     alt="file"
                     style={{
                       maxWidth: "200px",

@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 tf310-env/
 
+node_modules/
