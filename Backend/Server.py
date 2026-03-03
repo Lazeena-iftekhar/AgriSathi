@@ -8,6 +8,7 @@ from PIL import Image
 import tensorflow as tf
 from huggingface_hub import hf_hub_download, login
 import os
+import pickle
 
 from dotenv import load_dotenv
 
@@ -33,6 +34,19 @@ try:
 except Exception as e:
     print(f"Error loading soil model: {e}")
     model = None
+
+# Load price prediction model
+price_model = None
+state_encoder = None
+commodity_encoder = None
+
+try:
+    price_model = pickle.load(open("price_prediction_ml_model/price_model.pkl", "rb"))
+    state_encoder = pickle.load(open("price_prediction_ml_model/state_encoder.pkl", "rb"))
+    commodity_encoder = pickle.load(open("price_prediction_ml_model/commodity_encoder.pkl", "rb"))
+    print("Price prediction model loaded successfully!")
+except Exception as e:
+    print(f"Error loading price model: {e}")
 
 # Soil type labels and crop recommendations
 soil_labels = ['Alluvial Soil', 'Black Soil', 'Clay Soil', 'Red Soil', 'Sandy Soil']
@@ -229,6 +243,34 @@ def analyze_complete():
     except Exception as e:
         print(f"Error in complete analysis: {e}")
         return jsonify({"error": "Failed to process complete analysis"}), 500
+
+@app.route('/predict-price', methods=['POST'])
+def predict_price():
+    try:
+        if price_model is None:
+            return jsonify({"error": "Price model not loaded"}), 500
+
+        data = request.json
+
+        state = data.get("state")
+        commodity = data.get("cropName")
+
+        if not state or not commodity:
+            return jsonify({"error": "State and cropName required"}), 400
+
+        state_encoded = state_encoder.transform([state])[0]
+        commodity_encoded = commodity_encoder.transform([commodity])[0]
+
+        input_data = np.array([[state_encoded, commodity_encoded]])
+
+        prediction = price_model.predict(input_data)[0]
+
+        return jsonify({
+            "predicted_price": round(float(prediction), 2)
+        })
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
 @app.route('/health', methods=['GET'])
 def health_check():
