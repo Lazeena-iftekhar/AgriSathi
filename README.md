@@ -70,6 +70,8 @@ DB_USER=root
 DB_PASSWORD=your_password
 DB_NAME=farmers
 PORT=5000
+PLANT_ID_API_KEY=whatsapp group pe
+GEMINI_API_KEY=whatsapp group pe 
 ```
 
 ---
