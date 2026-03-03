@@ -31,6 +31,22 @@ app.use("/api/crops", pricePredictionRoutes);
 
 app.post("/api/chat", async (req, res) => {
   try {
+    const systemInstruction = {
+      role: "user",
+      parts: [
+        {
+          text: `
+                  You are AgriSathi AI, an expert agriculture assistant for Indian farmers.
+                  - Give practical farming advice.
+                  - Keep answers simple and clear.
+                  - If related to crops, soil, disease, or price prediction, explain step-by-step.
+                  - If user uploads an image, analyze it properly.
+                  - Use short paragraphs.
+                  `
+        }
+      ]
+    };
+
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
@@ -38,12 +54,18 @@ app.post("/api/chat", async (req, res) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(req.body),
+        body: JSON.stringify({
+          contents: [
+            systemInstruction,
+            ...req.body.contents
+          ]
+        }),
       }
     );
 
     const data = await response.json();
     res.json(data);
+
   } catch (error) {
     console.error("Gemini Error:", error);
     res.status(500).json({ error: "Gemini API failed" });

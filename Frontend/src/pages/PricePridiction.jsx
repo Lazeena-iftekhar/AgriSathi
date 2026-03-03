@@ -131,9 +131,9 @@ function PricePrediction() {
         </select>
 
         <select value={state} onChange={(e) => setState(e.target.value)}>
-          <option value="">Select state</option>
+          <option style={{backgroundColor: "#2e7d32;"}} value="">Select state</option>
           {indianStates.map((s, idx) => (
-            <option key={idx} value={s}>
+            <option style={{backgroundColor: "#2e7d32;"}} key={idx} value={s}>
               {s}
             </option>
           ))}
@@ -144,7 +144,7 @@ function PricePrediction() {
           disabled={loading}
           style={{
             padding: "10px 20px",
-            backgroundColor: "#4169e1",
+            backgroundColor: "#2e7d32;",
             color: "#fff",
             border: "none",
             borderRadius: "8px",
