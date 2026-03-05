@@ -1,3 +1,36 @@
+### 1. 🌿 Disease Detection Module
+
+- Image-based plant disease detection using Plant.id API  
+- Automatic plant identification with botanical details  
+- Confidence-based filtering (disease shown only if probability > 50%)  
+- Multi-disease probability ranking (sorted highest to lowest)  
+- Healthy plant classification using health assessment scoring  
+- Conditional additional advice (returned only when disease is confirmed)  
+- REST API integration (`/api/detect-disease`)  
+- Microservice architecture (Express ↔ Flask ↔ Plant.id)
+
+####🛠 Tech Stack Used
+
+- **Frontend:** React.js, React Hooks, CSS  
+- **Backend:** Node.js, Express.js, Multer  
+- **ML Service:** Python Flask  
+- **AI Integration:** Plant.id API  
+- **Communication:** REST API (Axios)
+
+#### 🧠 Detection Pipeline
+
+Frontend (React Image Upload)  
+⬇  
+Express Middleware (Multer + Request Validation)  
+⬇  
+Flask ML Microservice  
+⬇  
+Plant.id API (Disease Identification + Plant Recognition)  
+⬇  
+Probability Sorting + Confidence Threshold Filtering  
+⬇  
+Structured JSON Response to Frontend  
+
 ### 4. 💰 Price Prediction Module
 
 - Machine Learning–powered crop price estimation system integrated into the agricultural platform  
