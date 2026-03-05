@@ -19,17 +19,17 @@
 
 #### 🧠 Detection Pipeline
 
-Frontend (React Image Upload)  
-⬇  
-Express Middleware (Multer + Request Validation)  
-⬇  
-Flask ML Microservice  
-⬇  
-Plant.id API (Disease Identification + Plant Recognition)  
-⬇  
-Probability Sorting + Confidence Threshold Filtering  
-⬇  
-Structured JSON Response to Frontend  
+            Frontend (React Image Upload)  
+                        ⬇  
+            Express Middleware (Multer + Request Validation)  
+                        ⬇  
+            Flask ML Microservice  
+                        ⬇  
+            Plant.id API (Disease Identification + Plant Recognition)  
+                        ⬇  
+            Probability Sorting + Confidence Threshold Filtering  
+                        ⬇  
+            Structured JSON Response to Frontend  
 
 ### 4. 💰 Price Prediction Module
 
