@@ -1,4 +1,22 @@
-### 4. 💰 Price Prediction Module
+### 1. 🌾Crop Prediction Module
+
+- Image-based soil type classification using trained CNN model  
+- Top-3 soil prediction ranking (sorted by highest confidence)  
+- Smart confidence logic with probability percentage display    
+- Multi-crop recommendation (Top 5 most profitable crops)  
+- Confidence warning system for low-accuracy soil detection  
+- REST API integration (`/api/crop-prediction`)  
+- Microservice architecture (React ↔ Express ↔ Flask ML Service)
+
+#### 🛠 Tech Stack Used
+- **Backend:** Node.js, Express.js, Multer  
+- **ML Service:** Python Flask (Soil Classification Model)  
+- **Data Processing:** Pandas (Crop dataset filtering & profit calculation)  
+- **Weather Integration:** OpenWeatherMap API (Rainfall Data)  
+- **Communication:** REST API (Axios)  
+ ---
+
+ ### 2. 💰 Price Prediction Module
 
 - Machine Learning–powered crop price estimation system integrated into the agricultural platform  
 - Predicts expected market price based on selected **state** and **crop (commodity)**  
@@ -28,9 +46,43 @@
 5. Split dataset into training (80%) and testing (20%)  
 6. Train Random Forest Regressor model  
 7. Evaluate using Mean Absolute Error (MAE)  
-8. Serialize model and encoders using Pickle  
+8. Serialize model and encoders using Pickle
+---
+### 3. 🌿 Disease Detection Module
 
-### 6. 🌾AgriSathi AI Chatbot Module
+- Image-based plant disease detection using Plant.id API  
+- Automatic plant identification with botanical details  
+- Confidence-based filtering (disease shown only if probability > 50%)  
+- Multi-disease probability ranking (sorted highest to lowest)  
+- Healthy plant classification using health assessment scoring  
+- Conditional additional advice (returned only when disease is confirmed)  
+- REST API integration (`/api/detect-disease`)  
+- Microservice architecture (Express ↔ Flask ↔ Plant.id)
+
+####🛠 Tech Stack Used
+
+- **Frontend:** React.js, React Hooks, CSS  
+- **Backend:** Node.js, Express.js, Multer  
+- **ML Service:** Python Flask  
+- **AI Integration:** Plant.id API  
+- **Communication:** REST API (Axios)
+
+#### 🧠 Detection Pipeline
+
+            Frontend (React Image Upload)  
+                        ⬇  
+            Express Middleware (Multer + Request Validation)  
+                        ⬇  
+            Flask ML Microservice  
+                        ⬇  
+            Plant.id API (Disease Identification + Plant Recognition)  
+                        ⬇  
+            Probability Sorting + Confidence Threshold Filtering  
+                        ⬇  
+            Structured JSON Response to Frontend  
+---
+
+### 5. 🌾AgriSathi AI Chatbot Module
 
 - Full-screen, responsive AI-powered agricultural assistant integrated into the platform  
 - Supports contextual conversations for crop recommendation, soil classification, plant disease detection, and price insights  
@@ -45,7 +97,8 @@
 - **Frontend:** React.js, React Hooks (useState, useEffect, useRef), CSS, ReactMarkdown  
 - **Voice Processing:** Web Speech API  
 - **Backend:** Node.js, Express.js (REST API Integration)  
-- **AI Layer:** Google Gemini API (LLM-based conversational model integration)  
+- **AI Layer:** Google Gemini API (LLM-based conversational model integration)
+---
 
 
 ## 🚀 How to Run the Project
