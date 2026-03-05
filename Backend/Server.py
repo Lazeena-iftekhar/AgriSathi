@@ -98,8 +98,53 @@ def detect_disease():
         )
         
         if response.status_code == 200:
+        
             result = response.json()
-            return jsonify(result)
+
+            health_data = result.get("health_assessment", {})
+            diseases = health_data.get("diseases", [])
+            is_healthy = health_data.get("is_healthy", False)
+
+            additional_advice = []
+
+            # 🌿 If Healthy
+            if is_healthy:
+                additional_advice.append("Maintain regular watering schedule.")
+                additional_advice.append("Ensure adequate sunlight exposure.")
+                additional_advice.append("Use organic compost every 2-3 weeks.")
+
+            # 🌿 If Disease Detected
+            if diseases:
+                top_disease = diseases[0]
+                disease_name = top_disease.get("name", "")
+                confidence = top_disease.get("probability", 0) * 100
+
+                # Severity logic
+                if confidence > 75:
+                    additional_advice.append("High infection risk. Immediate treatment recommended.")
+                elif confidence > 50:
+                    additional_advice.append("Moderate infection. Monitor plant closely.")
+                else:
+                    additional_advice.append("Low confidence detection. Observe for 2-3 days.")
+
+                # Fungal logic
+                if "fung" in disease_name.lower() or "rust" in disease_name.lower():
+                    additional_advice.append("Avoid overhead irrigation.")
+                    additional_advice.append("Apply fungicide every 7 days.")
+
+                # Bacterial logic
+                if "bacter" in disease_name.lower():
+                    additional_advice.append("Remove infected leaves immediately.")
+                    additional_advice.append("Use copper-based bactericide spray.")
+
+                # General prevention
+                additional_advice.append("Ensure proper spacing between plants.")
+                additional_advice.append("Disinfect tools after use.")
+
+            # 🔥 Attach advice into response
+            result["additional_advice"] = additional_advice
+            return jsonify(result), 200
+
         else:
             error_msg = f"Plant.id API Error {response.status_code}"
             try:
@@ -107,9 +152,9 @@ def detect_disease():
                 error_msg += f" - {error_detail.get('message', response.text)}"
             except:
                 error_msg += f" - {response.text}"
-            
+                    
             return jsonify({"error": error_msg}), 500
-            
+                    
     except requests.exceptions.Timeout:
         return jsonify({"error": "Request timeout - plant identification service is slow"}), 504
     except requests.exceptions.ConnectionError:

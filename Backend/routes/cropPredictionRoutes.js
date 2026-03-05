@@ -35,10 +35,7 @@ router.post("/crop-prediction", upload.single("image"), async (req, res) => {
     );
 
     // Return the prediction result
-    res.json({ 
-      result: flaskResponse.data.result,
-      confidence: flaskResponse.data.confidence || null
-    });
+    res.json(flaskResponse.data);
 
   } catch (err) {
     console.error("Error processing image:", err);

@@ -397,6 +397,38 @@ function CropDisease() {
                 </div>
               )}
 
+
+              {/*Additional Advice*/}
+              {prediction.additional_advice && (
+                <div
+                  className="bg-yellow-50 border border-yellow-200 rounded-lg p-4"
+                  style={{
+                    background: 'linear-gradient(135deg, #fffde7 0%, #fff8e1 100%)',
+                    border: '2px solid #ffe082',
+                    borderRadius: '15px',
+                    padding: '20px',
+                    boxShadow: '0 4px 15px rgba(255, 193, 7, 0.1)'
+                  }}
+                >
+                  <h4
+                    className="font-semibold text-lg mb-3 text-yellow-800"
+                    style={{
+                      fontWeight: '600',
+                      fontSize: '1.3rem',
+                      marginBottom: '15px',
+                      color: '#f57f17'
+                    }}
+                  >
+                    Additional Advice
+                  </h4>
+                  <ul>
+                    {prediction.additional_advice.map((advice, i) => (
+                      <li key={i}> {advice}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Plant Information */}
               {prediction.plant_info && (
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4" style={{
