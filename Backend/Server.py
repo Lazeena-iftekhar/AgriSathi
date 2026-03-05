@@ -189,11 +189,35 @@ def predict_soil():
         img_array = np.expand_dims(img_array, axis=0)
         
         # Make prediction
-        prediction = model.predict(img_array)
-        predicted_class_idx = np.argmax(prediction)
-        predicted_soil = soil_labels[predicted_class_idx]
-        confidence = float(np.max(prediction))
-        
+        prediction = model.predict(img_array)[0]
+
+        # Get top 3 indices sorted by probability
+        top_3_indices = prediction.argsort()[-3:][::-1]
+
+        top_predictions = []
+        for idx in top_3_indices:
+            top_predictions.append({
+                "soil_type": soil_labels[idx],
+                "confidence": round(float(prediction[idx] * 100), 2)
+            })
+
+        # Highest confidence
+        highest_confidence = top_predictions[0]["confidence"]
+
+        # Smart confidence message
+        if highest_confidence < 60:
+            confidence_message = "Low confidence prediction. Please upload a clearer soil image."
+        elif highest_confidence < 80:
+            confidence_message = "Moderate confidence prediction."
+        else:
+            confidence_message = "High confidence prediction."
+
+        return jsonify({
+            "top_predictions": top_predictions,
+            "confidence_message": confidence_message,
+            "recommended_crops": crop_recommendations.get(top_predictions[0]["soil_type"], [])
+        })
+                
         # Get crop recommendations
         recommended_crops = crop_recommendations.get(predicted_soil, [])
         

@@ -9,7 +9,7 @@ body {
 /* Header */
 .div.main_content h1 {
   text-align: center;
-  margin: 20px 0;
+  /* margin: 20px 0; */
   font-size: 2.5rem;
   color: #2c3e50;
   text-shadow: 1px 1px 2px #fff;
@@ -220,26 +220,6 @@ body {
 }
 /*  */
 
-/* crop prediction */
-.div h1 {
-  text-align: center;
-  margin-top: 2px;
-  color: #2c3e50;
-  font-weight: bold;
-}
-.div h1 {
-  color: black;
-}
-/*  */
-
-.nav_bar {
-  width: 250px;
-  /* background-color: #343a40;  */
-  background-color: #5e7c59;
-  color: white;
-  flex-shrink: 0;
-}
-
 /* crop disease */
 
 /* Main container with gradient background */
@@ -250,7 +230,7 @@ body {
   flex-grow: 1;
   overflow-y: auto;
   overflow-x: hidden; /* ✅ added */
-  padding: 2rem 1.25rem;
+  padding: 1rem 1.25rem;
   position: relative;
   box-sizing: border-box; /* ✅ added */
 }
@@ -879,25 +859,7 @@ body {
 .state-cell:hover .buy-btn {
   display: inline-block;
 }
-/*  */
 
-/*  */
-/* .service img {
-  max-width: 60px;
-  width: 60px;
-  object-fit: contain;
-}
-
-.service .text h3 {
-  font-size: 16px;
-  margin: 0;
-}
-.service h4 {
-  color: black;
-  font-size: 16px;
-  margin: 0;
-} */
-/*  */
 
 /* Price Prediction Page Styles */
 .price-prediction-page {

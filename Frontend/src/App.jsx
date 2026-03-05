@@ -85,43 +85,6 @@ function App() {
                   <div
                     style={{
                       backgroundColor:
-                        location.pathname === "/CropDisease"
-                          ? "#2d6b4f"
-                          : "transparent",
-                      borderRadius: "8px",
-                      margin: "2px 0",
-                      transition: "all 0.3s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (location.pathname !== "/CropDisease") {
-                        e.target.style.backgroundColor = "#25a463";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (location.pathname !== "/CropDisease") {
-                        e.target.style.backgroundColor = "transparent";
-                      }
-                    }}
-                  >
-                    <a
-                      href="/CropDisease"
-                      className="nav-link text-white"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        padding: "10px 15px",
-                      }}
-                    >
-                      🦠 Crop Disease
-                    </a>
-                  </div>
-                </li>
-
-                <li>
-                  <div
-                    style={{
-                      backgroundColor:
                         location.pathname === "/CropPrediction"
                           ? "#2d6b4f"
                           : "transparent",
@@ -188,6 +151,43 @@ function App() {
                       }}
                     >
                       💰 Price Prediction
+                    </a>
+                  </div>
+                </li>
+
+                 <li>
+                  <div
+                    style={{
+                      backgroundColor:
+                        location.pathname === "/CropDisease"
+                          ? "#2d6b4f"
+                          : "transparent",
+                      borderRadius: "8px",
+                      margin: "2px 0",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (location.pathname !== "/CropDisease") {
+                        e.target.style.backgroundColor = "#25a463";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (location.pathname !== "/CropDisease") {
+                        e.target.style.backgroundColor = "transparent";
+                      }
+                    }}
+                  >
+                    <a
+                      href="/CropDisease"
+                      className="nav-link text-white"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        padding: "10px 15px",
+                      }}
+                    >
+                      🦠 Disease Detection
                     </a>
                   </div>
                 </li>
@@ -261,7 +261,7 @@ function App() {
                         padding: "10px 15px",
                       }}
                     >
-                      🤖 Chatbot
+                      🤖 AI Assistant
                     </a>
                   </div>
                 </li>
