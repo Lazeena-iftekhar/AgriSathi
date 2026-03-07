@@ -27,7 +27,7 @@ const Contact = () => {
     },
     {
       name: "Jasmine Rai",
-      role: "UI/UX Design & Frontend Developmentt",
+      role: "UI/UX Design & Frontend Development",
       social: {
         linkedin: "https://www.linkedin.com/in/jasmine-rai-6a422427b",
         github: "https://github.com/Assistantjasmine282",

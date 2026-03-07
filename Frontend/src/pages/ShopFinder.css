@@ -1,0 +1,100 @@
+/* root wrapper so it sits above background blobs */
+.shopfinder-wrapper {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+/* main card */
+.shopfinder-card {
+  background: white;
+  border-radius: 10px;
+  min-height: calc(120vh - 120px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* header bar */
+.shopfinder-header {
+  background: #2e7d32;
+  color: white;
+  padding: 14px 20px;
+  font-weight: 600;
+  font-size: 18px;
+  width: 100%;
+}
+
+/* content area */
+.shopfinder-body {
+  padding: 24px;
+}
+
+/* search row */
+.shopfinder-search {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* inputs */
+.shopfinder-input,
+.shopfinder-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* button */
+.shopfinder-button {
+  background: #2e7d32;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.shopfinder-button:hover {
+  background: #1b5e20;
+}
+
+/* shop cards */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+.shop-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: 0.2s;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.shop-card:hover {
+  transform: translateY(-3px);
+}
+.map-btn {
+  display: inline-block;
+  margin-top: auto;
+  padding: 8px 14px;
+  background-color: #2e7d32 !important;
+  color: white !important;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  text-align: center;  
+ 
+}
+
+.map-btn:hover {
+  background-color: #1b5e20 !important;
+}

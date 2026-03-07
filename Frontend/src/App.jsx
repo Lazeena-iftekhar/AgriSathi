@@ -5,7 +5,7 @@ import "./App.css";
 import Chatbot from "./pages/Chatbot.jsx";
 import CropPrediction from "./pages/CropPrediction.jsx";
 import Government from "./pages/Government.jsx";
-import MarketPlace from "./pages/Marketplace.jsx";
+import ShopFinder from "./pages/ShopFinder.jsx";
 import PricePridiction from "./pages/PricePridiction.jsx";
 import CropDisease from "./pages/CropDisease.jsx";
 import Contact from "./pages/Contact.jsx";
@@ -13,7 +13,7 @@ import Home from "./pages/Home.jsx";
 import BuyerLogin from "./pages/BuyerLogin.jsx";
 import AccessGuard from "./components/AccessGuard.jsx";
 import NotAuthorized from "./pages/NotAuthorized.jsx";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 function App() {
   //   useEffect(() => {
@@ -23,6 +23,7 @@ function App() {
   const [isBuyer, setIsBuyer] = useState(() => {
     return localStorage.getItem("isBuyer") === "true";
   });
+  // const location = useLocation();
 
   return (
     <>
@@ -118,6 +119,8 @@ function App() {
                   </div>
                 </li>
 
+              
+
                 <li>
                   <div
                     style={{
@@ -154,7 +157,45 @@ function App() {
                     </a>
                   </div>
                 </li>
-
+    <li>
+                  <div
+                    style={{
+                      backgroundColor:
+                        location.pathname === "/ShopFinder"
+                          ? "#2d6b4f"
+                          : "transparent",
+                      borderRadius: "8px",
+                      margin: "2px 0",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (location.pathname !== "/ShopFinder") {
+                        e.target.style.backgroundColor = "#25a463";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (location.pathname !== "/ShopFinder") {
+                        e.target.style.backgroundColor = "transparent";
+                      }
+                    }}
+                  >
+                    <a
+                      href="/ShopFinder"
+                      className="nav-link text-white"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        padding: "10px 15px",
+                      }}
+                    >
+                    🏪 
+                    
+                    ShopFinder
+                    </a>
+                  </div>
+                </li>
+                
                  <li>
                   <div
                     style={{
@@ -192,42 +233,7 @@ function App() {
                   </div>
                 </li>
 
-                <li>
-                  <div
-                    style={{
-                      backgroundColor:
-                        location.pathname === "/marketplace"
-                          ? "#2d6b4f"
-                          : "transparent",
-                      borderRadius: "8px",
-                      margin: "2px 0",
-                      transition: "all 0.3s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (location.pathname !== "/marketplace") {
-                        e.target.style.backgroundColor = "#25a463";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (location.pathname !== "/marketplace") {
-                        e.target.style.backgroundColor = "transparent";
-                      }
-                    }}
-                  >
-                    <a
-                      href="/marketplace"
-                      className="nav-link text-white"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        padding: "10px 15px",
-                      }}
-                    >
-                      🛒 Marketplace
-                    </a>
-                  </div>
-                </li>
+              
 
                 <li>
                   <div
@@ -346,7 +352,6 @@ function App() {
 
           <div className="main_content">
             <Routes>
-              <Route path="/marketplace" element={<MarketPlace />} />
               <Route
                 path="/PricePridiction"
                 element={
@@ -379,6 +384,7 @@ function App() {
                   </AccessGuard>
                 }
               />
+               <Route path="/ShopFinder" element={<ShopFinder />} />
               <Route path="/Government" element={<Government />} />
               <Route path="/Contact" element={<Contact />} />
               <Route path="/" element={<Home />} />
