@@ -8,9 +8,9 @@ const bodyParser = require("body-parser")
 
 const PORT = 5000;
 
-
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+
 
 
 app.get("/api/test", (req, res) => {
@@ -19,13 +19,13 @@ app.get("/api/test", (req, res) => {
 
 const diseaseRoutes = require("./routes/diseaseRoutes");
 const cropRoutes = require("./routes/cropPredictionRoutes");
-const marketplaceRoutes = require("./routes/marketplaceRoutes");
+const shopRoutes = require("./routes/shopRoutes");
 const pricePredictionRoutes = require("./routes/pricePrediction");
 // const paymentRoute = require("./routes/paymentRoute")
 
 app.use("/api", diseaseRoutes);
 app.use("/api", cropRoutes);
-app.use("/api/marketplace", marketplaceRoutes);
+app.use("/api", shopRoutes);
 app.use("/api/crops", pricePredictionRoutes); 
 // app.use("/api/payment", paymentRoute)
 
