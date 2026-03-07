@@ -157,45 +157,7 @@ function App() {
                     </a>
                   </div>
                 </li>
-    <li>
-                  <div
-                    style={{
-                      backgroundColor:
-                        location.pathname === "/ShopFinder"
-                          ? "#2d6b4f"
-                          : "transparent",
-                      borderRadius: "8px",
-                      margin: "2px 0",
-                      transition: "all 0.3s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (location.pathname !== "/ShopFinder") {
-                        e.target.style.backgroundColor = "#25a463";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (location.pathname !== "/ShopFinder") {
-                        e.target.style.backgroundColor = "transparent";
-                      }
-                    }}
-                  >
-                    <a
-                      href="/ShopFinder"
-                      className="nav-link text-white"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        padding: "10px 15px",
-                      }}
-                    >
-                    🏪 
-                    
-                    ShopFinder
-                    </a>
-                  </div>
-                </li>
-                
+
                  <li>
                   <div
                     style={{
@@ -229,6 +191,45 @@ function App() {
                       }}
                     >
                       🦠 Disease Detection
+                    </a>
+                  </div>
+                </li>
+
+                <li>
+                  <div
+                    style={{
+                      backgroundColor:
+                        location.pathname === "/ShopFinder"
+                          ? "#2d6b4f"
+                          : "transparent",
+                      borderRadius: "8px",
+                      margin: "2px 0",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (location.pathname !== "/ShopFinder") {
+                        e.target.style.backgroundColor = "#25a463";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (location.pathname !== "/ShopFinder") {
+                        e.target.style.backgroundColor = "transparent";
+                      }
+                    }}
+                  >
+                    <a
+                      href="/ShopFinder"
+                      className="nav-link text-white"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        padding: "10px 15px",
+                      }}
+                    >
+                    🏪 
+                    
+                   Nearby ShopFinder
                     </a>
                   </div>
                 </li>
@@ -267,7 +268,7 @@ function App() {
                         padding: "10px 15px",
                       }}
                     >
-                      🤖 AI Assistant
+                      🤖 AgriSathi AI Assistant
                     </a>
                   </div>
                 </li>
@@ -304,7 +305,7 @@ function App() {
                         padding: "10px 15px",
                       }}
                     >
-                      🏛 Government Subsidy
+                      🏛 Government Subsidies
                     </a>
                   </div>
                 </li>

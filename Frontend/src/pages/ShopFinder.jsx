@@ -198,7 +198,7 @@ return (
   rel="noopener noreferrer"
   className="map-btn"
 >
-   view in Google Maps
+   View in Google Maps
 </a>
             </div>
           ))}
