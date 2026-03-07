@@ -121,7 +121,7 @@
 
 ### 1️⃣ Environment Configuration
 
-Create a `.env` file inside the `backend` folder.
+Create a `.env` file inside the `backend` folder and the `frontend` folder.
 
 📁 **Path:**
 
@@ -137,8 +137,19 @@ DB_USER=root
 DB_PASSWORD=your_password
 DB_NAME=farmers
 PORT=5000
-PLANT_ID_API_KEY=whatsapp group pe
-GEMINI_API_KEY=whatsapp group pe 
+PLANT_ID_API_KEY=whatsapp group par
+GEMINI_API_KEY= "
+GOOGLE_API_KEY= "
+```
+📁 **Path:**
+```
+frontend/.env
+```
+
+Add the following content:
+
+```env
+VITE_GOOGLE_API_KEY= whatsapp
 ```
 
 ---
