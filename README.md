@@ -84,28 +84,17 @@
 ### 4. 🏪 Nearby Agricultural Shop Finder
 
 - Helps farmers easily locate nearby agricultural supply stores such as seed shops, fertilizer shops, pesticide stores, and other farming input providers.
-
 - Allows users to search agricultural shops by location and shop type (Seed, Fertilizer, Pesticide, Agriculture).
-
 - Displays nearby shops using Google Places API.
-
 - Shows important shop information including shop name, address, rating, and operational status.
-
 - Provides a “View in Google Maps” button for each shop to quickly open the location in Google Maps for navigation.
-
 - Improves accessibility for farmers by helping them find agricultural resources nearby without manual searching.
 
 #### 🛠 Tech Stack Used
-
-- **Frontend:** React.js, React Hooks (useState), CSS / Tailwind CSS for UI styling
-
-- **HTTP Client:** Axios for sending API requests from frontend to backend
-
 - **Backend:** Node.js, Express.js for handling shop search API requests
-
 - **Location & Places Data:** Google Places API for fetching nearby agricultural shops
-
 - **Maps Integration:** Google Maps Search URL for opening shop locations directly in Google Maps
+---
 
 ### 5. 🌾AgriSathi AI Chatbot Module
 
