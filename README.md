@@ -81,6 +81,20 @@
                         ⬇  
             Structured JSON Response to Frontend  
 ---
+### 4. 🏪 Nearby Agricultural Shop Finder
+
+- Helps farmers easily locate nearby agricultural supply stores such as seed shops, fertilizer shops, pesticide stores, and other farming input providers.
+- Allows users to search agricultural shops by location and shop type (Seed, Fertilizer, Pesticide, Agriculture).
+- Displays nearby shops using Google Places API.
+- Shows important shop information including shop name, address, rating, and operational status.
+- Provides a “View in Google Maps” button for each shop to quickly open the location in Google Maps for navigation.
+- Improves accessibility for farmers by helping them find agricultural resources nearby without manual searching.
+
+#### 🛠 Tech Stack Used
+- **Backend:** Node.js, Express.js for handling shop search API requests
+- **Location & Places Data:** Google Places API for fetching nearby agricultural shops
+- **Maps Integration:** Google Maps Search URL for opening shop locations directly in Google Maps
+---
 
 ### 5. 🌾AgriSathi AI Chatbot Module
 
@@ -107,7 +121,7 @@
 
 ### 1️⃣ Environment Configuration
 
-Create a `.env` file inside the `backend` folder.
+Create a `.env` file inside the `backend` folder and the `frontend` folder.
 
 📁 **Path:**
 
@@ -123,8 +137,19 @@ DB_USER=root
 DB_PASSWORD=your_password
 DB_NAME=farmers
 PORT=5000
-PLANT_ID_API_KEY=whatsapp group pe
-GEMINI_API_KEY=whatsapp group pe 
+PLANT_ID_API_KEY=whatsapp group par
+GEMINI_API_KEY= "
+GOOGLE_API_KEY= "
+```
+📁 **Path:**
+```
+frontend/.env
+```
+
+Add the following content:
+
+```env
+VITE_GOOGLE_API_KEY= whatsapp
 ```
 
 ---

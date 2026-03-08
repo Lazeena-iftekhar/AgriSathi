@@ -25,3 +25,4 @@ dist-ssr
 tf310-env/
 
 node_modules/
+.env
