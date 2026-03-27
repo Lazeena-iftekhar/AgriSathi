@@ -1,135 +1,124 @@
-
-
-import farmerImg from "../assets/farmerImg.jpg";
-import aboutusImg from "../assets/aboutusImg.jpg";
-import { useState } from "react";
-import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 function Home() {
-  const [response, setResponse] = useState("");
+  const navigate = useNavigate();
 
-  const handleClick = async () => {
-    try {
-      const res = await axios.get("http://localhost:5000/api/test");
-      setResponse(res.data.message);
-    } catch (err) {
-      setResponse("Error calling API");
-      console.error(err);
-    }
-  };
+  const [counts, setCounts] = useState({
+    crop: 0,
+    disease: 0,
+    price: 0,
+    farmers: 0,
+  });
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      i += 500;
+
+      setCounts({
+        crop: Math.min(i, 50000),
+        disease: Math.min(i, 30000),
+        price: Math.min(i, 20000),
+        farmers: Math.min(i, 10000),
+      });
+
+      if (i >= 50000) clearInterval(interval);
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <>
-      <div className="div main_content1">
+    <div className="home-dashboard">
 
-        {/* TOP BACKGROUND */}
-        <div className="top-bg"></div>
+      {/* HEADER */}
+      <div className="home-header center fade-in">
+        <h1>Good Evening, Farmer 🌾</h1>
+        <h5>Smart agriculture solutions for better farming.</h5>
+        <div className="location-text">📍 Lucknow, India</div>
+      </div>
 
-        <h1>Welcome to AgriSathi</h1>
+      {/* WEATHER */}
+      <div className="weather-card fade-in">
+        🌤 Warm weather expected. Ideal for irrigation & monitoring.
+      </div>
 
-        {/* FEATURE CARDS */}
-        <div className="slideshow-wrapper">
-          <div className="slideshow-track">
-
-            <div className="element">
-              <img src="https://cdn-icons-png.flaticon.com/128/14148/14148453.png" />
-              <h3>AI Crop Suggestion</h3>
-            </div>
-
-            <div className="element">
-              <img src="https://cdn-icons-png.flaticon.com/128/12538/12538865.png" />
-              <h3>Disease</h3>
-              <h4>Detection</h4>
-            </div>
-
-            <div className="element">
-              <img src="https://cdn-icons-png.flaticon.com/128/2769/2769441.png" />
-              <h3>Regional Language</h3>
-            </div>
-
-            <div className="element">
-              <img src={farmerImg} alt="Farmer" />
-            </div>
-
-            <div className="element">
-              <img src="https://cdn-icons-png.flaticon.com/128/10831/10831334.png" />
-              <h3>Crop Price</h3>
-              <h4>Prediction</h4>
-            </div>
-
-            <div className="element">
-              <img src="https://cdn-icons-png.flaticon.com/128/18525/18525350.png" />
-              <h3>Govt</h3>
-              <h4>Subsidies</h4>
-            </div>
-
-            <div className="element">
-              <img src="https://cdn-icons-png.flaticon.com/128/6815/6815546.png" />
-              <h3>Marketplace</h3>
-              <h4>for Farmers</h4>
-            </div>
-
-          </div>
+      {/* STATS */}
+      <div className="stats-row single-row fade-in">
+        <div className="stat-box">
+          <h2>{counts.crop / 1000}K+</h2>
+          <p>Crop Predictions</p>
         </div>
 
-
-        {/* ABOUT AGRISATHI SECTION */}
-        <h1>About AgriSathi</h1>
-
-        <div className="about-agrisathi">
-
-          {/* LEFT IMAGE */}
-          <div className="about-image">
-            <img src={aboutusImg} alt="Farmer working in field" />
-          </div>
-
-          {/* RIGHT TEXT BOX */}
-          <div className="about-box">
-
-            <h2>Empowering Farmers with Technology</h2>
-
-            <p>
-              AgriSathi is an AI-powered digital platform designed to assist
-              farmers in making smarter agricultural decisions. The platform
-              combines modern technology with farming knowledge to help farmers
-              improve productivity and profitability.
-            </p>
-
-            <p>
-              With AgriSathi, farmers can detect crop diseases using AI,
-              receive crop recommendations based on soil conditions, predict
-              crop prices in advance, and access government schemes and
-              subsidies easily.
-            </p>
-
-            <p>
-              The platform also includes a regional language chatbot that helps
-              farmers get answers to their farming queries quickly. Our goal is
-              to make farming more efficient, informed, and accessible for
-              every farmer.
-            </p>
-
-          </div>
-
+        <div className="stat-box">
+          <h2>{counts.disease / 1000}K+</h2>
+          <p>Disease Detection</p>
         </div>
 
+        <div className="stat-box">
+          <h2>{counts.price / 1000}K+</h2>
+          <p>Price Forecasts</p>
+        </div>
 
-        {/* BOTTOM BACKGROUND */}
-        <div className="bottom-bg"></div>
+        <div className="stat-box">
+          <h2>{counts.farmers / 1000}K+</h2>
+          <p>Farmers Helped</p>
+        </div>
+      </div>
+
+      {/* SERVICES */}
+      <h2 className="section-title">🌾 Our Services</h2>
+
+      <div className="feature-grid">
+
+        <div className="feature-card" onClick={() => navigate("/CropPrediction")}>
+          <h3>📊 Crop Prediction</h3>
+          <p>AI-based crop suggestions</p>
+        </div>
+
+        <div className="feature-card" onClick={() => navigate("/PricePridiction")}>
+          <h3>💰 Price Prediction</h3>
+          <p>Forecast market prices</p>
+        </div>
+
+        <div className="feature-card" onClick={() => navigate("/CropDisease")}>
+          <h3>🦠 Disease Detection</h3>
+          <p>Detect plant diseases</p>
+        </div>
+
+        <div className="feature-card" onClick={() => navigate("/Chatbot")}>
+          <h3>🤖 AI Assistant</h3>
+          <p>Ask farming queries</p>
+        </div>
+
+        <div className="feature-card" onClick={() => navigate("/ShopFinder")}>
+          <h3>🏪 Shop Finder</h3>
+          <p>Find nearby shops</p>
+        </div>
+
+        <div className="feature-card" onClick={() => navigate("/Government")}>
+          <h3>🏛 Govt Schemes</h3>
+          <p>Explore subsidies</p>
+        </div>
 
       </div>
-    </>
+
+      {/* ABOUT */}
+      <div className="about-section center fade-in">
+        <h2>🌾 About AgriSathi</h2>
+        <p>
+          AgriSathi is an AI-powered agriculture platform built to transform the way farmers make decisions.
+          It combines intelligent crop prediction, disease detection, and price forecasting into one seamless experience.
+          Farmers can easily access government schemes, find nearby agricultural stores, and get real-time assistance
+          through an AI chatbot in their regional language. With a focus on simplicity and impact, AgriSathi empowers
+          farmers to increase productivity, reduce risks, and embrace modern, data-driven farming practices.
+        </p>
+      </div>
+
+    </div>
   );
 }
 
 export default Home;
-
-
-
-
-
-
-
-

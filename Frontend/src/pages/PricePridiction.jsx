@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { IndianRupee  } from "lucide-react";
 import "../App.css";
 
 
@@ -8,7 +9,6 @@ const crops = ["Wheat", "Tomato", "Potato", "Onion", "Rice"];
 const indianStates = [
   "Andaman and Nicobar Islands",
   "Andhra Pradesh",
-  "Arunachal Pradesh",
   "Assam",
   "Bihar",
   "Chandigarh",
@@ -117,12 +117,21 @@ function PricePrediction() {
   }, []);
 
   return (
-    <div className="price-prediction-page" style={{ padding: "20px" }}>
-      <h1>🌾 Price Prediction</h1>
+    <div className="price-prediction-page">
+      <div className="header-section">
+      <h1 className="main-title">
+        Price Prediction
+        <IndianRupee size={34} className="title-icon" />
+      </h1>
+      <h3 className="subtitle">
+        Select a crop and your state to predict price.
+      </h3>
+    </div>
+
 
       <div className="prediction-form" style={{ marginBottom: "20px" }}>
           <select value={crop} onChange={(e) => setCrop(e.target.value)}>
-          <option value="">Select crop</option>
+          <option  style={{backgroundColor: "#cafccc"}} value="">Select crop</option>
           {crops.map((c, index) => (
             <option key={index} value={c}>
               {c}
@@ -131,9 +140,9 @@ function PricePrediction() {
         </select>
 
         <select value={state} onChange={(e) => setState(e.target.value)}>
-          <option style={{backgroundColor: "#2e7d32;"}} value="">Select state</option>
+          <option style={{backgroundColor: "#cafccc"}} value="">Select state</option>
           {indianStates.map((s, idx) => (
-            <option style={{backgroundColor: "#2e7d32;"}} key={idx} value={s}>
+            <option key={idx} value={s}>
               {s}
             </option>
           ))}
@@ -144,7 +153,7 @@ function PricePrediction() {
           disabled={loading}
           style={{
             padding: "10px 20px",
-            backgroundColor: "#2e7d32;",
+            backgroundColor: "#2e7d32",
             color: "#fff",
             border: "none",
             borderRadius: "8px",
@@ -203,15 +212,30 @@ function PricePrediction() {
       )}
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <h2>🌾 Prediction Result</h2>
-            <p>Predicted Price:</p>
-            <h3>₹ {predictedPrice}</h3>
-            <button onClick={() => setShowModal(false)}>OK</button>
-          </div>
-        </div>
-      )}
+  <div className="modal-overlay">
+    <div className="modal-box modern">
+
+      <h2 className="modal-title">🌾 Price Insight</h2>
+
+      <div className="price-highlight">
+        ₹ {predictedPrice}
+      </div>
+
+      <p className="price-subtext">
+        Estimated market price for <b>{crop}</b> in <b>{state}</b>
+      </p>
+
+      <div className="price-tag">
+        📈 Good Market Trend
+      </div>
+
+      <button onClick={() => setShowModal(false)}>
+        Got it 👍
+      </button>
+
+    </div>
+  </div>
+)}
     </div>
   );
 }

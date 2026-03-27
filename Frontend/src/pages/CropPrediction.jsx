@@ -80,8 +80,8 @@ function CropPrediction() {
   <div className="main_content1">
     <div className="header-section">
       <h1 className="main-title">
-        <Leaf className="title-icon" />
         Crop Prediction
+        <Leaf className="title-icon" />
       </h1>
       <h3 className="subtitle">
         Upload an image of the soil to identify the crops you can grow
