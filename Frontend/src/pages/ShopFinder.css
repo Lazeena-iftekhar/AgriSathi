@@ -3,16 +3,19 @@
   position: relative;
   z-index: 5;
   width: 100%;
+
 }
 
 /* main card */
 .shopfinder-card {
-  background: white;
+  background: #F5F7F5;
   border-radius: 10px;
   min-height: calc(120vh - 120px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   overflow: hidden;
 }
+
+
 
 /* header bar */
 .shopfinder-header {
@@ -26,14 +29,27 @@
 
 /* content area */
 .shopfinder-body {
+ 
   padding: 24px;
+   display: flex;
+   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh; 
+  
 }
 
-/* search row */
+
+
 .shopfinder-search {
   display: flex;
-  gap: 12px;
+  flex-direction: column;   /* 🔥 vertical */
+  align-items: center; 
+  width: 60%;     /* 🔥 center horizontally */
+  gap: 15px;
+  
   margin-bottom: 24px;
+ 
 }
 
 /* inputs */
@@ -92,9 +108,15 @@
   text-decoration: none;
   transition: background 0.2s ease;
   text-align: center;  
- 
 }
 
 .map-btn:hover {
   background-color: #1b5e20 !important;
+}
+
+.shopfinder-input,
+.shopfinder-select,
+.shopfinder-button {
+  width: 100%;
+  max-width: 400px;  /* 🔥 keeps centered */
 }

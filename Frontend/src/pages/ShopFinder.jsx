@@ -1,10 +1,21 @@
 import { useState } from "react";
 import axios from "axios";
 import "./ShopFinder.css";
+import { useLoadScript } from "@react-google-maps/api";
+import { useRef,useEffect } from "react";
+import { TiLocation } from "react-icons/ti";
+import { GiPathDistance } from "react-icons/gi";
+import { FaMapLocationDot } from "react-icons/fa6";
 function ShopFinder() {
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
   const [shops, setShops] = useState([]);
+  //aouto complete
+ const { isLoaded } = useLoadScript({
+  googleMapsApiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+  libraries: ["places"],
+});
+const inputRef = useRef(null);
 
   const searchShops = async () => {
     if (!location || !type) {
@@ -36,105 +47,24 @@ setShops(res.data);
     }
   };
 
-//   return (
-//  <div className="bg-white ">
-// <div className="rounded-lg shadow-md w-full min-h-[calc(100vh-60px)]">
+useEffect(() => {
+  if (!isLoaded || !inputRef.current) return;
 
-//       {/* <h2>Nearby Agricultural Shop Finder</h2> */}
-//  <div className="bg-green-500 text-black px-5 py-3 rounded-md font-semibold text-lg mb-6">
-//   🌾 Nearby Agricultural Shop Finder
-// </div>
-  
+  const autocomplete = new window.google.maps.places.Autocomplete(
+    inputRef.current,
+    {
+      componentRestrictions: { country: "in" }, // optional: restrict to India
+    }
+  );
 
-//       {/* <input
-//         type="text"
-//         placeholder="Enter Location"
-//         value={location}
-//         onChange={(e) => setLocation(e.target.value)}
-//       />
+  autocomplete.addListener("place_changed", () => {
+    const place = autocomplete.getPlace();
+    if (place.formatted_address) {
+      setLocation(place.formatted_address);
+    }
+  });
 
-//       <select onChange={(e) => setType(e.target.value)}>
-//         <option>Select Shop Type</option>
-//         <option value="seed">Seed Shop</option>
-//         <option value="fertilizer">Fertilizer Shop</option>
-//         <option value="pesticide">Pesticide Shop</option>
-//         <option value="agriculture">Agriculture Shop</option>
-//       </select> */}
-
-
-//       {/* <button onClick={searchShops}>Search</button> */}
-
-//       <div className="flex gap-3 mb-6">
-
-// <input
-//   type="text"
-//   placeholder="Enter Location"
-//   value={location}
-//   onChange={(e) => setLocation(e.target.value)}
-//   className="border border-gray-300 rounded-md px-3 py-2 flex-1 focus:outline-none focus:ring-2 focus:ring-green-500"
-// />
-
-// <select
-//   onChange={(e) => setType(e.target.value)}
-//   className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-// >
-//   <option>Select Shop Type</option>
-//   <option value="seed">Seed Shop</option>
-//   <option value="fertilizer">Fertilizer Shop</option>
-//   <option value="pesticide">Pesticide Shop</option>
-//   <option value="agriculture">Agriculture Shop</option>
-// </select>
-
-// <button
-//   onClick={searchShops}
-//   className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-md transition"
-// >
-//   Search
-// </button>
-
-// </div>
-
-//       {/* <div className="shop-grid"> */}
-// <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//         {shops.map((shop, index) => (
-//           // <div className="shop-card" key={index}>
-// <div
-//   key={index}
-//   className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition"
-// >
-//             {/* <h3>{shop.name}</h3>
-
-//             <p>{shop.formatted_address}</p>
-
-//             <p>⭐ Rating: {shop.rating || "N/A"}</p>
-
-//             <p>Status: {shop.business_status}</p> */}
-
-// <h3 className="text-lg font-semibold text-gray-800 mb-2">
-//   {shop.name}
-// </h3>
-
-// <p className="text-sm text-gray-600 mb-1">
-//   📍 {shop.formatted_address}
-// </p>
-
-// <p className="text-sm text-yellow-600 mb-1">
-//   ⭐ Rating: {shop.rating || "N/A"}
-// </p>
-
-// <p className="text-sm text-gray-500">
-//   Status: {shop.business_status || "Unknown"}
-// </p>
-//           </div>
-//         ))}
-
-//       </div>
-//     </div>
-   
-
-//     </div>
-//   );
-
+}, [isLoaded]);
 
 return (
   <div className="shopfinder-wrapper">
@@ -151,9 +81,11 @@ return (
 
           <input
             type="text"
+             ref={inputRef}
             placeholder="Enter Location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
+           defaultValue={location}
             className="shopfinder-input"
           />
 
@@ -184,11 +116,12 @@ return (
 
               <h3>{shop.name}</h3>
 
-              <p>📍 {shop.formatted_address}</p>
+              <p><TiLocation color="red" size={20}/> Address: {shop.formatted_address}</p>
 
               <p>⭐ Rating: {shop.rating || "N/A"}</p>
 
-              <p>Status: {shop.business_status || "Unknown"}</p>
+              <p>⚠️Status: {shop.business_status || "Unknown"}</p>
+              <p><GiPathDistance color="red" size={24}/>Distance: {shop.distance ? shop.distance.toFixed(1) + " km away" : ""}</p>
 
               <a
   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -198,8 +131,10 @@ return (
   rel="noopener noreferrer"
   className="map-btn"
 >
-   View in Google Maps
+  <FaMapLocationDot color="white" size={20}/>
+    View in Google Maps
 </a>
+
             </div>
           ))}
 
