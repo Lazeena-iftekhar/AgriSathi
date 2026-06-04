@@ -5,6 +5,7 @@ function CropDisease() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [popup, setPopup] = useState(null);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -19,7 +20,7 @@ function CropDisease() {
     const imageFile = fileInput?.files[0];
 
     if (!imageFile) {
-      alert("Please upload an image first.");
+      setPopup({ type: "error", message: "Please upload an image first." });
       return;
     }
 
@@ -38,6 +39,10 @@ function CropDisease() {
       setPrediction(result);
     } catch (error) {
       console.error("Error uploading image:", error);
+      setPopup({
+        type: "error",
+        message: "Failed to detect disease. Please try again."
+      });
       setPrediction({
         status: "error",
         message: "Failed to detect disease. Please try again.",
@@ -259,6 +264,20 @@ function CropDisease() {
               </div>
             )}
           </button>
+          {popup && (
+            <div style={{
+              marginTop: "10px",
+              padding: "10px 14px",
+              borderRadius: "10px",
+              background: "#fff3f3",
+              border: "1px solid #ffb3b3",
+              color: "#c62828",
+              fontSize: "14px",
+              fontWeight: "500"
+            }}>
+              ⚠️ {popup.message}
+            </div>
+)}
         </div>
 
         {/* Results Section */}

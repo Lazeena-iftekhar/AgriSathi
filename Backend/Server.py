@@ -173,9 +173,60 @@ def detect_disease():
 
         image_bytes = file.read()
 
-        base64_image = base64.b64encode(image_bytes).decode('utf-8')
+        if len(image_bytes) == 0:
+            return jsonify({"error": "Empty image file"}), 400
 
-        response = requests.post(
+        if not validate_image_magic(image_bytes):
+            return jsonify({
+                "error": "Invalid file type. Only JPG, PNG, GIF and WebP images are allowed."
+            }), 415
+
+        base64_image = base64.b64encode(image_bytes).decode("utf-8")
+
+        identify_response = requests.post(
+            "https://plant.id/api/v3/identification",
+            headers={
+                "Api-Key": PLANT_ID_API_KEY
+            },
+            files={
+                "images": image_bytes
+            },
+            data={},  
+            timeout=30
+        )
+
+        print("STATUS:", identify_response.status_code)
+        print("TEXT:", identify_response.text)
+
+        identify_data = identify_response.json()
+
+        is_plant = (
+            identify_data
+            .get("result", {})
+            .get("is_plant", {})
+        )
+
+        if not is_plant.get("binary", False):
+            return jsonify({
+                "error": "Invalid Input Object",
+                "message": "Uploaded image does not contain a plant."
+            }), 422
+
+        if is_plant.get("probability", 0) < 0.60:
+            return jsonify({
+                "error": "Invalid Input Object",
+                "message": "Please upload a clear plant leaf image."
+            }), 422
+
+        is_valid, message = check_image_quality(image_bytes)
+
+        if not is_valid:
+            return jsonify({
+                "error": "Low quality image",
+                "message": "Plant image is blurry. Please upload a clearer leaf image."
+            }), 422
+
+        disease_response = requests.post(
             "https://api.plant.id/v2/health_assessment",
             json={
                 "api_key": PLANT_ID_API_KEY,
@@ -185,11 +236,11 @@ def detect_disease():
             timeout=30
         )
 
-        return jsonify(response.json()), response.status_code
+        return jsonify(disease_response.json()), disease_response.status_code
 
     except Exception as e:
+        print("Disease Detection Error:", e)
         return jsonify({"error": str(e)}), 500
-
 
 @app.route('/predict', methods=['POST'])
 def predict_soil():
@@ -230,7 +281,7 @@ def predict_soil():
             if not is_probably_soil(img):
                 return jsonify({
                     "error": "Invalid Input Object",
-                    "message": "Uploaded image does not appears to be soil. Please upload a soil image."
+                    "message": "Uploaded image does not appears to be clear. Please upload a soil image."
                 }), 422
         except Exception:
             return jsonify({
@@ -253,7 +304,7 @@ def predict_soil():
         if highest_confidence < 0.75:
             return jsonify({
                 "error": "Invalid Input Object",
-                "message": f"Uploaded image is not clear."
+                "message": f"Uploaded image does not appears to be soil. Please upload a soil image."
             }), 422
 
         top_indices = prediction.argsort()[-3:][::-1]
