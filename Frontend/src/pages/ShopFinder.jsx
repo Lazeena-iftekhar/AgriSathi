@@ -32,7 +32,7 @@ const inputRef = useRef(null);
       // const res = await axios.get(url);
       // setShops(res.data.results);
       const res = await axios.get(
-              "http://localhost:5000/api/shops",
+              "https://agrisathi-express.onrender.com/api/shops",
      {
    params: {
     location,

@@ -80,7 +80,7 @@ function PricePrediction() {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/crops/add-price", {
+      const res = await axios.post("https://agrisathi-express.onrender.com/api/crops/add-price", {
         cropName: crop,
         state,
         district: district || "",
@@ -104,7 +104,7 @@ function PricePrediction() {
 
   const fetchHistory = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/crops/history");
+      const res = await axios.get("https://agrisathi-express.onrender.com/api/crops/history");
       setHistory(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error("Error fetching history:", err);
@@ -116,7 +116,7 @@ function PricePrediction() {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete("http://localhost:5000/api/crops/history");
+      await axios.delete("https://agrisathi-express.onrender.com/api/crops/history");
       setHistory([]);
     } catch (err) {
       console.error("Error clearing history:", err);

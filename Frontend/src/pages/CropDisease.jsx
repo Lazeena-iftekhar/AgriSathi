@@ -30,7 +30,7 @@ function CropDisease() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/detect-disease", {
+      const res = await fetch("https://agrisathi-express.onrender.com/api/detect-disease", {
         method: "POST",
         body: formData,
       });
