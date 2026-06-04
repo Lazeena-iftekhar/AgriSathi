@@ -13,7 +13,6 @@ tf310-env/
 venv
 venv/
 
-Backend/price_prediction_ml_model/*.pkl
 Backend/price_prediction_ml_model/*.joblib
 node_modules/
 venv/
