@@ -13,6 +13,8 @@ import pickle
 from datetime import datetime
 from dotenv import load_dotenv
 from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input, decode_predictions
+import tensorflow as tf
+import keras
 
 load_dotenv()
 
@@ -33,7 +35,8 @@ try:
 
     model = tf.keras.models.load_model(model_path)
     print("✅ Soil model loaded")
-
+    print(tf.__version__)
+    print(keras.__version__)
 except Exception as e:
     print("❌ Soil model error:", e)
 

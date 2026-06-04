@@ -4,7 +4,3 @@ venv
 
 venv/
 # Ignore heavy machine learning models
-*.pkl
-*.h5
-*.pt
-Backend/price_prediction_ml_model/price_model.pkl
