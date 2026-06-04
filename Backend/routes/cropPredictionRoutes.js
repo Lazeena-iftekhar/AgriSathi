@@ -67,7 +67,7 @@ router.post(
       });
 
       formData.append("state", state.trim());
-
+      console.log("Calling Flask Predict...");
       const flaskResponse = await axios.post(
         "https://agrisathiml.onrender.com/predict",
         formData,
@@ -75,14 +75,17 @@ router.post(
           headers: {
             ...formData.getHeaders(),
           },
-          timeout: 15000,
+          timeout: 120000,
         }
       );
+      console.log("Flask Response Received");
 
       return res.status(200).json(flaskResponse.data);
 
     } catch (err) {
       console.error("Crop Prediction Error:", err.message);
+      console.log(err.code);
+      console.log(err.response?.data);
 
       if (err.code === "ECONNREFUSED") {
         return res.status(503).json({
