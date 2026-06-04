@@ -69,7 +69,7 @@ router.post(
       formData.append("state", state.trim());
       console.log("Calling Flask Predict...");
       const flaskResponse = await axios.post(
-        "https://agrisathiml.onrender.com/predict",
+        " https://cakes-finals-charm-tale.trycloudflare.com/predict",
         formData,
         {
           headers: {

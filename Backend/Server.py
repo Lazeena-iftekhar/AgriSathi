@@ -12,7 +12,7 @@ import os
 import pickle
 from datetime import datetime
 from dotenv import load_dotenv
-# from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input, decode_predictions
+from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input, decode_predictions
 import tensorflow as tf
 import keras
 
@@ -25,7 +25,7 @@ PLANT_ID_API_KEY = os.getenv("PLANT_ID_API_KEY")
 
 model = None
 
-# imagenet_model = MobileNetV2(weights="imagenet")
+imagenet_model = MobileNetV2(weights="imagenet")
 
 try:
     model_path = hf_hub_download(
@@ -126,7 +126,45 @@ def check_image_quality(image_bytes):
     return True, None
 
 def is_probably_soil(img):
+    img224 = img.resize((224, 224))
+
+    arr = np.array(img224)
+    arr = np.expand_dims(arr, axis=0)
+
+    arr = preprocess_input(arr)
+
+    preds = imagenet_model.predict(arr, verbose=0)
+
+    decoded = decode_predictions(preds, top=5)[0]
+
+    forbidden_keywords = [
+        "person",
+        "face",
+        "dog",
+        "cat",
+        "car",
+        "truck",
+        "bus",
+        "phone",
+        "laptop",
+        "keyboard",
+        "television",
+        "pizza",
+        "burger",
+        "sandwich",
+        "bicycle",
+        "motorcycle"
+    ]
+
+    for _, label, confidence in decoded:
+        label = label.lower()
+
+        for keyword in forbidden_keywords:
+            if keyword in label and confidence > 0.30:
+                return False
+
     return True
+
 
 @app.route('/detect-disease', methods=['POST'])
 def detect_disease():

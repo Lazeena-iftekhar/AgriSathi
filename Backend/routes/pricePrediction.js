@@ -29,7 +29,7 @@ router.post("/add-price", async (req, res) => {
       });
     }
 
-    const mlResponse = await fetch("https://agrisathiml.onrender.com/predict-price", {
+    const mlResponse = await fetch(" https://cakes-finals-charm-tale.trycloudflare.com /predict-price", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
