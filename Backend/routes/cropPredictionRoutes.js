@@ -69,7 +69,7 @@ router.post(
       formData.append("state", state.trim());
 
       const flaskResponse = await axios.post(
-        "http://localhost:5001/predict",
+        "https://agrisathiml.onrender.com/predict",
         formData,
         {
           headers: {

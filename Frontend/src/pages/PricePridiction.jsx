@@ -36,7 +36,7 @@ function PricePrediction() {
       return;
     }
 
-    axios.get("http://localhost:5001/get-options")
+    axios.get("https://agrisathiml.onrender.com/get-options")
       .then(res => {
         const data = res.data;
         localStorage.setItem("agri-options", JSON.stringify(data));

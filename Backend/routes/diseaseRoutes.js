@@ -28,7 +28,7 @@ formData.append("image", req.file.buffer, {
 });
 
 const flaskResponse = await axios.post(
-  "http://localhost:5001/detect-disease",
+  "https://agrisathiml.onrender.com/detect-disease",
   formData,
   {
     headers: {
