@@ -434,6 +434,42 @@ def predict_price():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+#Options
+@app.route('/get-options', methods=['GET'])
+def get_options():
+    try:
+        import pandas as pd
+
+        df1 = pd.read_csv("./price_prediction_ml_model/dataset1.csv")
+        df2 = pd.read_csv("./price_prediction_ml_model/dataset2.csv")
+
+        df2 = df2.rename(columns={
+            "STATE": "State",
+            "District Name": "District",
+            "Market Name": "Market"
+        })
+
+        df = pd.concat([df1, df2])
+        df = df[["State", "District", "Market", "Commodity"]].dropna()
+
+        df = df.applymap(lambda x: str(x).strip().title())
+
+        states = sorted(df["State"].unique())
+
+        districts = {s: sorted(df[df["State"] == s]["District"].unique()) for s in states}
+        markets = {d: sorted(df[df["District"] == d]["Market"].unique()) for d in df["District"].unique()}
+        crops = {s: sorted(df[df["State"] == s]["Commodity"].unique()) for s in states}
+
+        return jsonify({
+            "states": states,
+            "districts": districts,
+            "markets": markets,
+            "stateCropMap": crops
+        })
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 @app.route('/health', methods=['GET'])
 def health():
