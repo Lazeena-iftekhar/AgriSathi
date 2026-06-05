@@ -36,7 +36,7 @@ function PricePrediction() {
       return;
     }
 
-    axios.get("https://largest-scene-dirt-dad.trycloudflare.com/get-options")
+    axios.get("https://largest-scene-dirt-dad.trycloudflare.com/api/get-options")
       .then(res => {
         const data = res.data;
         localStorage.setItem("agri-options", JSON.stringify(data));
